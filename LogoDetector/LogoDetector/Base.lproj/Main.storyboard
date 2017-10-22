@@ -34,7 +34,7 @@
                                 <rect key="frame" x="0.0" y="499" width="375" height="168"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IbJ-rJ-fZl" customClass="RoundButton">
-                                        <rect key="frame" x="118.5" y="15" width="138" height="138"/>
+                                        <rect key="frame" x="119" y="15" width="138" height="138"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="IbJ-rJ-fZl" secondAttribute="height" multiplier="1:1" id="s31-cE-3yk"/>
                                         </constraints>
@@ -45,11 +45,20 @@
                                             <action selector="btn_TouchUp:" destination="cva-TF-emf" eventType="touchUpInside" id="N2K-G3-YB1"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z6K-WI-Q3L">
+                                        <rect key="frame" x="165" y="15" width="46" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="LearnInfo:" destination="cva-TF-emf" eventType="touchUpInside" id="mAL-UN-f7K"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="IbJ-rJ-fZl" firstAttribute="top" secondItem="sKq-e8-sun" secondAttribute="top" constant="15" id="3jh-Ia-gxm"/>
+                                    <constraint firstItem="Z6K-WI-Q3L" firstAttribute="centerX" secondItem="IbJ-rJ-fZl" secondAttribute="centerX" id="IMU-yv-DC0"/>
                                     <constraint firstAttribute="bottom" secondItem="IbJ-rJ-fZl" secondAttribute="bottom" constant="15" id="mUF-MQ-QBV"/>
+                                    <constraint firstItem="IbJ-rJ-fZl" firstAttribute="top" secondItem="Z6K-WI-Q3L" secondAttribute="bottom" constant="-30" id="rc9-ji-olD"/>
                                     <constraint firstAttribute="centerX" secondItem="IbJ-rJ-fZl" secondAttribute="centerX" id="vNJ-FU-v4t"/>
                                 </constraints>
                             </view>

@@ -11,6 +11,7 @@
 //  Copyright (c) 2015 altaibayar tseveenbayar. All rights reserved.
 //
 
+
 #import "CameraViewController.h"
 #import <opencv2/highgui/ios.h>
 
@@ -18,6 +19,8 @@
 #import "MLManager.h"
 #import "ImageUtils.h"
 #import "GeometryUtil.h"
+
+#import "LogoDetector-Swift.h"
 
 #ifdef DEBUG
 #import "FPS.h"
@@ -32,6 +35,7 @@
     CvVideoCamera *camera;
     BOOL started;
     cv::Mat templateImg;
+    
 }
 
 @end
@@ -42,12 +46,45 @@
 {
     [super viewDidLoad];
     
+
+    //Learn here?
+ 
+    if(KeyLibViewController.selectedUIImage != nil){
+       
+        printf("learning");
+        
+        [[MLManager sharedInstance] learn:KeyLibViewController.selectedUIImage];
+        
+        //Have to make sure it's a jpg...
+        
+        
+        /*
+        UIImage *img = [UIImage imageNamed: @"OceanicLogo"];
+        img = KeyLibViewController.selectedUIImage;
+        
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        
+        // getting an NSString
+        //NSString *myString = [prefs stringForKey:@"img0"];
+        //img = [UIImage imageNamed: @"img0"];
+        
+        //NSData *data = [prefs dataForKey:@"img0"];
+        //img = [UIImage imageWithData:data];
+
+        [[MLManager sharedInstance] learn: img];
+        */
+        
+    }
+
     //UI
     [_btn setTitle: @" " forState: UIControlStateNormal];
     
     //Camera
     camera = [[CvVideoCamera alloc] initWithParentView: _img];
+    
     camera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionFront;
+    //camera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionBack;
+    
     camera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset640x480;
     camera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
     camera.defaultFPS = 30;
@@ -61,6 +98,9 @@
     templateImg = [ImageUtils cvMatFromUIImage: logo];
     
     
+}
+- (IBAction)LearnInfo:(id)sender {
+
 }
 
 -(void)viewDidAppear:(BOOL)animated

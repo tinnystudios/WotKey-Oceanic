@@ -21,6 +21,11 @@ class KeyLibViewController: UIViewController, UINavigationControllerDelegate,UII
     var savedDataStr : String = "no data";
     var cIndex : Int = 0;
 
+    
+    public static var mIndex : Int = 0; //Look for this index
+    public static var selectedUIImage : UIImage!;
+  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -56,12 +61,7 @@ class KeyLibViewController: UIViewController, UINavigationControllerDelegate,UII
         UIImageWriteToSavedPhotosAlbum(imgSelectedImage.image!, nil, nil, nil);
     }
     */
-    
-    
-    
-    
-    
-    
+
     
     
     @IBAction func LoadImage(_ sender: Any) {
@@ -71,6 +71,10 @@ class KeyLibViewController: UIViewController, UINavigationControllerDelegate,UII
     @IBAction func OnClear(_ sender: Any){
         ClearImgs()
         keyImageView.image = nil
+    }
+    
+    public static func SetStaticIndex(i : Int){
+        mIndex = i;
     }
     
     func LoadImage(){
@@ -83,9 +87,15 @@ class KeyLibViewController: UIViewController, UINavigationControllerDelegate,UII
         if keyImageView == nil{
             return;
         }
+    
         keyImageView.image = LoadImageFromLibrary(index: cIndex)
-        
         textKeyId.text = "Key " + String(cIndex)
+        
+        
+        type(of: self).mIndex = cIndex
+        
+        //KeyLibViewController.selectedUIImage = keyImageView.image
+        type(of: self).selectedUIImage = LoadImageFromLibrary(index: cIndex)
         
         cIndex += 1
         
@@ -94,10 +104,22 @@ class KeyLibViewController: UIViewController, UINavigationControllerDelegate,UII
         }
     }
     
+    func ApplyImageInfo(){
+    KeyLibViewController.selectedUIImage = LoadImageFromLibrary(index: cIndex)
+    }
+    
+    public static func StaticLoadImage(){}
+    
     func LoadImageFromLibrary(index: Int) -> UIImage{
         let imgStr : String = "img" + String(index)
         let data = UserDefaults.standard.object(forKey: imgStr) as! NSData
         return UIImage(data: data as Data)!
+    }
+    
+    func GetNSDataFromImage(index: Int) -> NSData{
+        let imgStr : String = "img" + String(index)
+        let data = UserDefaults.standard.object(forKey: imgStr) as! NSData
+        return data
     }
     
     func ClearImgs(){
@@ -122,7 +144,7 @@ class KeyLibViewController: UIViewController, UINavigationControllerDelegate,UII
         var imgStr : String = "img" + String(curIndex)
         
         while isKeyPresentInUserDefaults(key: imgStr) {
-            print("index: \(curIndex)!")
+            //print("index: \(curIndex)!")
 
             curIndex += 1
             imgStr = "img" + String(curIndex)

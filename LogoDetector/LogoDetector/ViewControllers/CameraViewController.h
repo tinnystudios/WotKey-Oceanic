@@ -14,9 +14,12 @@
 #import <UIKit/UIKit.h>
 #import <opencv2/highgui/cap_ios.h>
 
+
 @interface CameraViewController : UIViewController < CvVideoCameraDelegate >
 
 @property (weak, nonatomic) IBOutlet UIImageView *img;
 @property (weak, nonatomic) IBOutlet UIButton *btn;
+
+@property (weak, nonatomic) IBOutlet UIImageView *testView;
 
 @end

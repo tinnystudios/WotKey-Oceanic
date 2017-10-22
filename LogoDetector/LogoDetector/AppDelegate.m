@@ -14,6 +14,7 @@
 #import "AppDelegate.h"
 
 #import "MLManager.h"
+#import "LogoDetector-Swift.h"
 
 #define FIRST_START_KEY @"FIRST_START"
 
@@ -25,9 +26,11 @@
     if ([self isFirstStart])
     {
         //Goal is to be able to call this learn function when you entered the detection view!
-        [[MLManager sharedInstance] learn: [UIImage imageNamed: @"OceanicLogo"]];
+        //[[MLManager sharedInstance] learn: [UIImage imageNamed: @"OceanicLogo"]];
+        
         [self setFirstStartFlag];
     }
+    
     
     return YES;
     
